@@ -1,4 +1,4 @@
-package org.fisa.seminar;
+package org.fisa.seminar.post;
 
 import lombok.*;
 

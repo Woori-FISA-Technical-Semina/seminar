@@ -1,7 +1,8 @@
-package org.fisa.seminar;
+package org.fisa.seminar.member;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.fisa.seminar.post.Post;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 

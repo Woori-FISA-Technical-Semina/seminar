@@ -1,7 +1,10 @@
-package org.fisa.seminar;
+package org.fisa.seminar.post;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.fisa.seminar.member.Member;
+import org.fisa.seminar.member.MemberDTO;
+import org.fisa.seminar.member.MemberRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,22 +17,6 @@ public class PostService {
 
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
-
-    /**
-     * 멤버 생성
-     * @param memberDTO
-     * @return 저장된 멤버
-     */
-    public Member createMember(MemberDTO memberDTO) throws RuntimeException {
-
-        Member member = Member.builder()
-                .loginId(memberDTO.getLoginId())
-                .name(memberDTO.getName())
-                .nickname(memberDTO.getNickname())
-                .build();
-
-        return memberRepository.save(member);
-    }
 
     /**
      * 글 작성

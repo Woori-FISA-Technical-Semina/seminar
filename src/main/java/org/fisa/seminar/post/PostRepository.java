@@ -1,5 +1,6 @@
-package org.fisa.seminar;
+package org.fisa.seminar.post;
 
+import org.fisa.seminar.member.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
