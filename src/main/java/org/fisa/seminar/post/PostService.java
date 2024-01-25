@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.fisa.seminar.member.Member;
 import org.fisa.seminar.member.MemberDTO;
 import org.fisa.seminar.member.MemberRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class PostService {
      * @param postDTO
      * @return 저장된 글
      */
+//    @Cacheable(value = "post", key = "#postDTO", cacheManager = "contentCacheManager")
     public void writePost(PostDTO postDTO) throws RuntimeException {
         Member member = memberRepository.findMemberByLoginId(postDTO.getLoginId());
                 //.orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
