@@ -6,6 +6,9 @@ import org.fisa.seminar.post.Post;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter
@@ -23,6 +26,7 @@ public class Member {
     private Long id;
 
     // 로그인 아이디
+    @Column(nullable = false, unique = true)
     private String loginId;
 
     // 이름
@@ -32,9 +36,8 @@ public class Member {
     private String nickname;
 
     // 게시글
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="post")
-    private Post post;
+    @OneToMany(mappedBy = "member")
+    private List<Post> posts = new ArrayList<>();
 
     @Builder
     public Member(String loginId, String name, String nickname) {

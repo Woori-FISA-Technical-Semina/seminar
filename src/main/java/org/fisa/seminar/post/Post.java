@@ -40,7 +40,9 @@ public class Post {
 		this.content = content;
 	}
 
-	public void setContent(String content) {
+	public void setPost(String title, String content) {
+		this.title = title;
 		this.content = content;
 	}
+
 }

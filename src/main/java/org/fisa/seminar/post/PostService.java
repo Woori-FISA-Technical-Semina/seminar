@@ -26,8 +26,9 @@ public class PostService {
      */
 //    @Cacheable(value = "post", key = "#postDTO", cacheManager = "contentCacheManager")
     public void writePost(PostDTO postDTO) throws RuntimeException {
-        Member member = memberRepository.findMemberByLoginId(postDTO.getLoginId());
-                //.orElseThrow(() -> new RuntimeException("해당 로그인 아이디를 가진 회원이 존재하지 않습니다."));
+//        Member member = memberRepository.findMemberByLoginId(postDTO.getLoginId());
+        Member member = memberRepository.findById(postDTO.getMemberId())
+                .orElseThrow(() -> new RuntimeException("해당 아이디를 가진 회원이 존재하지 않습니다."));
 
         log.info("member {}", member.getId());
 
@@ -50,8 +51,11 @@ public class PostService {
                 .orElseThrow(() -> new RuntimeException("해당 ID를 가진 글이 존재하지 않습니다."));
 
         return PostDTO.builder()
+                .memberId(post.getMember().getId())
+                .loginId(post.getMember().getLoginId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .author(post.getMember().getName())
                 .build();
     }
 
@@ -64,7 +68,7 @@ public class PostService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new RuntimeException("해당 ID를 가진 글이 존재하지 않습니다."));
 
-        post.setContent(postDTO.getContent());
+        post.setPost(postDTO.getTitle(), postDTO.getContent());
         postRepository.save(post);
     }
 
@@ -84,6 +88,7 @@ public class PostService {
      * @param keyword 검색 키워드
      * @return 검색 결과
      */
+    @Cacheable(value = "keyword", key = "#keyword", cacheManager = "contentCacheManager")
     public List<PostDTO> search(String keyword) throws RuntimeException {
         try {
             // 회원 이름이나 닉네임에 검색 키워드가 포함된 회원을 찾습니다.

@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 
 @Builder
 public class PostDTO {
+    private Long memberId;
     private String loginId;
     private String title;
     private String content;
