@@ -52,8 +52,11 @@ public class PostService {
                 .orElseThrow(() -> new RuntimeException("해당 ID를 가진 글이 존재하지 않습니다."));
 
         return PostDTO.builder()
+                .memberId(post.getMember().getId())
+                .loginId(post.getMember().getLoginId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .author(post.getMember().getName())
                 .build();
     }
 
@@ -66,7 +69,7 @@ public class PostService {
         Post post = postRepository.findById(postId)
                 .orElseThrow(() -> new RuntimeException("해당 ID를 가진 글이 존재하지 않습니다."));
 
-        post.setContent(postDTO.getContent());
+        post.setPost(postDTO.getTitle(), postDTO.getContent());
         postRepository.save(post);
     }
 

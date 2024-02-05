@@ -36,9 +36,6 @@ public class Member {
     private String nickname;
 
     // 게시글
-//    @ManyToOne(fetch=FetchType.LAZY)
-//    @JoinColumn(name="post")
-//    private Post post;
     @OneToMany(mappedBy = "member")
     private List<Post> posts = new ArrayList<>();
 
