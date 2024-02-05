@@ -24,7 +24,7 @@ public class Post {
 
 	// 회원
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="account")
+	@JoinColumn(name="member")
 	private Member member;
 
 	// 제목
