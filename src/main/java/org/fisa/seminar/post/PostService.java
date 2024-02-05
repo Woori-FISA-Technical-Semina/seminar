@@ -9,6 +9,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -88,7 +89,7 @@ public class PostService {
      * @param keyword 검색 키워드
      * @return 검색 결과
      */
-    @Cacheable(value = "keyword", key = "#keyword", cacheManager = "contentCacheManager")
+    @Cacheable(value = "search", key = "#keyword", cacheManager = "contentCacheManager")
     public List<PostDTO> search(String keyword) throws RuntimeException {
         try {
             // 회원 이름이나 닉네임에 검색 키워드가 포함된 회원을 찾습니다.
